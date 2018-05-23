@@ -1,5 +1,5 @@
 <component name="ArtifactManager">
-  <artifact type="exploded-war" name="StrutsExample:war exploded">
+  <artifact type="exploded-war" name="TrulyNews:war exploded">
     <output-path>$PROJECT_DIR$/target/TrulyNews</output-path>
     <root id="root">
       <element id="directory" name="WEB-INF">
@@ -16,6 +16,7 @@
           <element id="library" level="project" name="Maven: commons-validator:commons-validator:1.3.1" />
           <element id="library" level="project" name="Maven: oro:oro:2.0.8" />
           <element id="library" level="project" name="Maven: org.apache.struts:struts-taglib:1.3.10" />
+          <element id="library" level="project" name="Maven: javax.servlet:jstl:1.2" />
         </element>
       </element>
       <element id="directory" name="META-INF">

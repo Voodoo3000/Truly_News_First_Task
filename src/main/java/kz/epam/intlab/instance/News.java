@@ -6,10 +6,19 @@ import java.util.Date;
 
 public class News extends ActionForm {
 
+    private Integer id;
     private String title;
     private String brief;
     private String content;
-    private Date date = new Date();
+    private String date = String.valueOf(new Date());
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
 
     public String getTitle() {
         return title;
@@ -35,11 +44,11 @@ public class News extends ActionForm {
         this.content = content;
     }
 
-    public Date getDate() {
+    public String getDate() {
         return date;
     }
 
-    public void setDate(Date date) {
+    public void setDate(String date) {
         this.date = date;
     }
 }

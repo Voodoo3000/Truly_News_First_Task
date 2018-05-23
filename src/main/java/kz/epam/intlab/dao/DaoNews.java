@@ -2,35 +2,56 @@ package kz.epam.intlab.dao;
 
 import kz.epam.intlab.instance.News;
 
-import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 
 public class DaoNews implements DaoService {
 
-    private static News news;
+    private static Map<Integer, News> newsTitle = new HashMap<>();
+    private static News newsOne, newsTwo, newsThree;
 
     static {
-        news = new News();
-        news.setTitle("Hawaii emergency declared over volcano eruption");
-        news.setDate(news.getDate());
-        news.setBrief("Mount Kilauea volcano has erupted near a residential area on Hawaii's largest island, prompting a local state of emergency and the mandatory evacuation of 1,700 residents.");
-        news.setContent("Extremely high levels of dangerous sulphur dioxide gas have been detected in the evacuation area, the Civil Defense Agency tweeted.\n" +
+        newsOne = new News();
+        newsOne.setId(0);
+        newsOne.setTitle("Israel and Iran trade fire in most direct confrontation yet");
+        newsOne.setBrief("In the most direct confrontation between Israel and Iran to date, the two regional enemies exchanged fire for hours during a volatile night in the Golan Heights.");
+        newsOne.setContent("In the most direct confrontation between Israel and Iran to date, the two regional enemies exchanged fire for hours during a volatile night in the Golan Heights.\n" +
                 "\n" +
-                "Community centres have been opened to provide shelter.\n" +
+                "The extended barrage of fire comes amid soaring tensions between Israel and Iran, two rivals battling for regional influence, and less than two days after the United States withdrew from the deal to curb Iran's nuclear program.\n" +
+                "Israel said more than 20 rockets were launched by Iranian forces in Syria towards Israeli-claimed territory late Wednesday, often criss-crossing across the clear night skies. A number of those rockets were intercepted by Israel's Iron Dome aerial defense system, resulting in bright and sudden explosions.");
+        newsTwo = new News();
+        newsTwo.setId(1);
+        newsTwo.setTitle("Malaysia's Mahathir set to become world's oldest leader");
+        newsTwo.setBrief("Veteran Malaysian politician Mahathir Mohamad is set to become the world's oldest leader after a shock victory in the country's election, when he upended six decades of control by the ruling coalition.");
+        newsTwo.setContent("Veteran Malaysian politician Mahathir Mohamad is set to become the world's oldest leader after a shock victory in the country's election, when he upended six decades of control by the ruling coalition.\n" +
                 "\n" +
-                "The eruption follows a series of strong earthquakes over recent days.\n" +
+                "In his triumphant return to front line Malaysian politics, Prime Minister-elect Mahathir -- who also ruled the country from 1981 to 2003 -- pledged to form a new government quickly, following a momentous night in which scandal-plagued incumbent Najib Razak was soundly beaten at the polls by his former mentor.\n" +
+                "Mahathir, who will become the world's oldest leader aged 92, set a challenge to Malaysia's constitutional ruler, King Muhammad V, who needs to rubber-stamp his appointment, to install him as the new leader by 5 p.m. (5 a.m. ET).\n" +
+                "\"We hope that by 5 o'clock today, we will have a prime minister,\" he said at a press conference to mark his electoral victory.\n" +
+                "Shortly before that deadline, his car, along with those of the leaders of his coalition partners, were seen entering the palace gates. However, it wasn't clear whether Mahathir was being sworn in.\n");
+        newsThree = new News();
+        newsThree.setId(2);
+        newsThree.setTitle("President Trump welcomes 3 Americans freed by North Korea");
+        newsThree.setBrief("Under an American flag and dark night sky, US President Donald Trump personally welcomed home three American detainees Thursday morning after they were released from North Korea.");
+        newsThree.setContent("Under an American flag and dark night sky, US President Donald Trump personally welcomed home three American detainees Thursday morning after they were released from North Korea.\n" +
                 "\n" +
-                "A volcanic crater vent - known as Puu Oo - collapsed earlier this week, sending lava down the mountain's slopes towards populated areas.\n" +
-                "\n" +
-                "Officials had been warning residents all week they should be prepared to evacuate as an eruption would give little warning.We were evacuated a couple of hours ago and we are now with friends. It's me, my daughter, her boyfriend, and their two children, who are six years old and 20 months old. We all got shoved in a car and off we went.\n" +
-                "\n" +
-                "Within about half an hour of the eruption, it went on social media, so me and my daughter went down to look at it. You could hear and feel the eruption a good half a mile away, and the closer you got, the more you could feel it.\n" +
-                "\n" +
-                "It was like when someone plays the bass really heavy, and you can feel the bass - you could really feel the power and the lava - the colour of the lava was unbelievable, and the sound was unbelievable. It sounds very explosive, like something really explosive is coming out of a little hole, it's spitting out as hard as it can. It's not so much what you hear, it's what you feel.");
+                "The Americans -- Kim Dong Chul, Kim Hak-song and Kim Sang Duk, also known as Tony Kim -- were freed Wednesday while Secretary of State Mike Pompeo was on a visit to the North Korean capital of Pyongyang to discuss President Trump's upcoming summit with North Korean leader Kim Jong Un.\n" +
+                "No family members or friends of the three freed Americans were on hand for their arrival in the early hours of Thursday due to protocol reasons, an official told CNN, adding the men had to first debrief intelligence officials before heading to their homes.\n" +
+                "Speaking to the media on the tarmac at Joint Base Andrews Air Force Base, Kim Dong Chul said his release felt \"like a dream.\"\n" +
+                "\"We are very, very happy,\" said Kim.");
     }
 
     @Override
-    public News getNews() {
-        return DaoNews.news;
+    public Map<Integer, News> getAllNews() {
+        newsTitle.put(newsOne.getId(), newsOne);
+        newsTitle.put(newsTwo.getId(), newsTwo);
+        newsTitle.put(newsThree.getId(), newsThree);
+        return newsTitle;
+    }
+
+    @Override
+    public News getNewsById(Integer id) {
+        return newsTitle.get(id);
     }
 
     @Override

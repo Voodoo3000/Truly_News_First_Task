@@ -12,8 +12,20 @@
 
     <action-mappings>
         <action path="/main"
-                type="kz.epam.intlab.action.HelloWorldAction"
+                type="kz.epam.intlab.action.OpenMainPageAction"
                 name="news">
+            <forward name="success" path="/main.jsp"/>
+        </action>
+        <action path="/openNews"
+                type="kz.epam.intlab.action.OpenSelectedNewsAction"
+                name="news"
+                input="main.jsp">
+            <forward name="success" path="/edit.jsp"/>
+        </action>
+        <action path="/update"
+                type="kz.epam.intlab.action.UpdateAction"
+                name="news"
+                input="/edit.jsp">
             <forward name="success" path="/main.jsp"/>
         </action>
     </action-mappings>
