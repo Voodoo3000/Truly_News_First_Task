@@ -1,11 +1,14 @@
 package kz.epam.intlab.instance;
 
 import org.apache.struts.action.ActionForm;
-import org.apache.struts.action.ActionMapping;
+import org.hibernate.annotations.GenericGenerator;
 
-import javax.servlet.http.HttpServletRequest;
+import javax.persistence.*;
+
 import java.util.Date;
 
+@Entity
+@Table(name = "News")
 public class News extends ActionForm {
 
     private Integer id;
@@ -14,6 +17,9 @@ public class News extends ActionForm {
     private String content;
     private String date = String.valueOf(new Date());
 
+    @Id
+    @GeneratedValue(generator="increment")
+    @GenericGenerator(name="increment", strategy = "increment")
     public Integer getId() {
         return id;
     }
@@ -22,6 +28,7 @@ public class News extends ActionForm {
         this.id = id;
     }
 
+    @Column(name = "TITLE")
     public String getTitle() {
         return title;
     }
@@ -30,6 +37,7 @@ public class News extends ActionForm {
         this.title = title;
     }
 
+    @Column(name = "BRIEF")
     public String getBrief() {
         return brief;
     }
@@ -38,6 +46,7 @@ public class News extends ActionForm {
         this.brief = brief;
     }
 
+    @Column(name = "CONTENT")
     public String getContent() {
         return content;
     }
@@ -46,6 +55,7 @@ public class News extends ActionForm {
         this.content = content;
     }
 
+    @Column(name = "NEWSDATE")
     public String getDate() {
         return date;
     }
@@ -53,5 +63,4 @@ public class News extends ActionForm {
     public void setDate(String date) {
         this.date = date;
     }
-
 }
