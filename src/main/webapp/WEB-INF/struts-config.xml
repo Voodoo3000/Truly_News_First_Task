@@ -16,18 +16,28 @@
                 name="news">
             <forward name="success" path="/main.jsp"/>
         </action>
-        <action path="/openNews"
+        <action path="/openSelectedNews"
                 type="kz.epam.intlab.action.OpenSelectedNewsAction"
                 name="news"
                 input="main.jsp">
-            <forward name="success" path="/edit.jsp"/>
+            <forward name="success" path="/selected_news.jsp"/>
         </action>
-        <action path="/update"
-                type="kz.epam.intlab.action.UpdateAction"
-                name="news"
-                input="/edit.jsp">
+        <action path="/openEditMode"
+                type="kz.epam.intlab.action.OpenSelectedNewsAction"
+                name="news">
+            <forward name="success" path="/edit_mode.jsp"/>
+        </action>
+        <action path="/addUpdateNews"
+                type="kz.epam.intlab.action.AddUpdateNewsAction"
+                name="news">
+            <forward name="success" path="/selected_news.jsp"/>
+        </action>
+        <action path="/deleteNews"
+                type="kz.epam.intlab.action.DeleteNewsAction"
+                name="news">
             <forward name="success" path="/main.jsp"/>
         </action>
+
     </action-mappings>
 
 </struts-config>

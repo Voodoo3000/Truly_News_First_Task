@@ -14,9 +14,11 @@ public class OpenMainPageAction extends Action{
     public ActionForward execute(ActionMapping mapping,ActionForm form,
                                  HttpServletRequest request,HttpServletResponse response) throws Exception {
 
-        DaoNews daoNews = new DaoNews();
-
-        request.setAttribute("newsTitle", daoNews.getAllNews());
+        if (request.getSession().getAttribute("newsTitle") == null) {
+            DaoNews daoNews = new DaoNews();
+            request.getSession().setAttribute("newsTitle", daoNews.getAllNews());
+            request.getSession().setAttribute("checkedBoxesList", DaoNews.getCheckedBoxesList());
+        }
 
         return mapping.findForward("success");
     }

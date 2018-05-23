@@ -2,12 +2,16 @@ package kz.epam.intlab.dao;
 
 import kz.epam.intlab.instance.News;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class DaoNews implements DaoService {
 
     private static Map<Integer, News> newsTitle = new HashMap<>();
+    private static Map<Integer, Boolean> checkedBoxesMap = new HashMap<>();
+    private static List<Integer> checkedBoxesList = new ArrayList<>();
     private static News newsOne, newsTwo, newsThree;
 
     static {
@@ -55,6 +59,41 @@ public class DaoNews implements DaoService {
     }
 
     @Override
-    public void editNews(News newsBean) {
+    public void addNews(News newsBean) {
+        newsTitle.put(newsBean.getId(), newsBean);
+    }
+
+    @Override
+    public void updateNews(News newsBean) {
+        newsTitle.put(newsBean.getId() , newsBean);
+    }
+
+    @Override
+    public void deleteNews(News newsBean) {
+        newsTitle.remove(newsBean.getId(), newsBean);
+    }
+
+    public static Map<Integer, News> getNewsTitle() {
+        return newsTitle;
+    }
+
+    public static void setNewsTitle(Map<Integer, News> newsTitle) {
+        DaoNews.newsTitle = newsTitle;
+    }
+
+    public static Map<Integer, Boolean> getCheckedBoxesMap() {
+        return checkedBoxesMap;
+    }
+
+    public static void setCheckedBoxesMap(Map<Integer, Boolean> checkedBoxesMap) {
+        DaoNews.checkedBoxesMap = checkedBoxesMap;
+    }
+
+    public static List<Integer> getCheckedBoxesList() {
+        return checkedBoxesList;
+    }
+
+    public static void setCheckedBoxesList(List<Integer> checkedBoxesList) {
+        DaoNews.checkedBoxesList = checkedBoxesList;
     }
 }
