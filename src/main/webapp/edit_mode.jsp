@@ -40,11 +40,6 @@
                 </h4>
                 <hr>
                 <div>
-                    Edit news id:
-                </div>
-                <html:textarea name="news" property="id" cols="150" rows="1"/>
-                <br>
-                <div>
                     Edit news date:
                 </div>
                 <html:textarea name="news" property="date" cols="150" rows="1"/>

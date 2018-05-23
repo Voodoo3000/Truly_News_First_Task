@@ -1,6 +1,7 @@
 package kz.epam.intlab.action;
 
 import kz.epam.intlab.dao.DaoNews;
+import kz.epam.intlab.instance.News;
 import org.apache.struts.action.Action;
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
@@ -13,11 +14,9 @@ public class OpenSelectedNewsAction extends Action {
 
     public ActionForward execute(ActionMapping mapping, ActionForm form,
                                  HttpServletRequest request, HttpServletResponse response) throws Exception {
-        Integer selectedNewsId;
-        selectedNewsId = Integer.valueOf(request.getParameter("id"));
+        News newsBean = (News) form;
         DaoNews daoNews = new DaoNews();
-        request.setAttribute("news", daoNews.getNewsById(selectedNewsId));
-
+        request.setAttribute("news", daoNews.getNewsById(newsBean.getId()));
 
         return mapping.findForward("success");
     }

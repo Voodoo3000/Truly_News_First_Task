@@ -6,13 +6,11 @@ import java.util.Map;
 
 public interface DaoService {
 
-    void addNews(News newsBean);
+    void addUpdateNews(News newsBean);
 
     Map<Integer, News> getAllNews();
 
     News getNewsById(Integer id);
-
-    void updateNews (News newsBean);
 
     void deleteNews (News newsBean);
 }

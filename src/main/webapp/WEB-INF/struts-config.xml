@@ -34,13 +34,13 @@
         <action path="/deleteNews"
                 type="kz.epam.intlab.action.DeleteNewsAction"
                 name="news">
-            <forward name="success" path="/main.jsp"/>
+            <forward name="success" path="/main.do"/>
         </action>
         <action path="/deleteSelectedNews"
                 type="kz.epam.intlab.action.DeleteSelectedNews"
                 name="news"
                 input="main.jsp">
-            <forward name="success" path="/main.jsp"/>
+            <forward name="success" path="/main.do"/>
         </action>
     </action-mappings>
 

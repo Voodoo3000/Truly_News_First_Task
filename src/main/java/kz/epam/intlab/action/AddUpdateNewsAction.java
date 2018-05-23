@@ -18,11 +18,7 @@ public class AddUpdateNewsAction extends Action {
 
         DaoService daoNews = new DaoNews();
         News newsBean = (News) form;
-
-        if (daoNews.getAllNews().containsKey(newsBean.getId())) {
-            daoNews.updateNews(newsBean);
-        }
-        daoNews.addNews(newsBean);
+        daoNews.addUpdateNews(newsBean);
 
         return mapping.findForward("success");
     }

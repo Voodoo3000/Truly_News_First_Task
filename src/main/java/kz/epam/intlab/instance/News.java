@@ -1,7 +1,9 @@
 package kz.epam.intlab.instance;
 
 import org.apache.struts.action.ActionForm;
+import org.apache.struts.action.ActionMapping;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.Date;
 
 public class News extends ActionForm {
@@ -51,4 +53,5 @@ public class News extends ActionForm {
     public void setDate(String date) {
         this.date = date;
     }
+
 }
