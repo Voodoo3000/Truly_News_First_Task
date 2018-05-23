@@ -12,8 +12,7 @@
 
     <action-mappings>
         <action path="/main"
-                type="kz.epam.intlab.action.OpenMainPageAction"
-                name="news">
+                type="kz.epam.intlab.action.OpenMainPageAction">
             <forward name="success" path="/main.jsp"/>
         </action>
         <action path="/openSelectedNews"
@@ -37,7 +36,12 @@
                 name="news">
             <forward name="success" path="/main.jsp"/>
         </action>
-
+        <action path="/deleteSelectedNews"
+                type="kz.epam.intlab.action.DeleteSelectedNews"
+                name="news"
+                input="main.jsp">
+            <forward name="success" path="/main.jsp"/>
+        </action>
     </action-mappings>
 
 </struts-config>

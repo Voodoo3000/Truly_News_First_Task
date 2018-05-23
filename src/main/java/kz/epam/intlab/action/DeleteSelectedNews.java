@@ -15,10 +15,12 @@ public class DeleteSelectedNews extends Action {
     public ActionForward execute(ActionMapping mapping, ActionForm form,
                                  HttpServletRequest request, HttpServletResponse response) throws Exception {
 
-        List<Integer> checkedBoxesList = (List<Integer>) request.getAttribute("checkedBoxesList");
+        String[] parameterValues = request.getParameterValues("deleteNewsCheckbox");
         DaoNews daoNews = new DaoNews();
-        for (int i : checkedBoxesList) {
-            daoNews.deleteNews(daoNews.getNewsById(i));
+        int id;
+        for (String s :  parameterValues) {
+            id = Integer.parseInt(s);
+            daoNews.deleteNews(daoNews.getNewsById(id));
         }
 
         return mapping.findForward("success");

@@ -46,7 +46,7 @@
                     <hr>
                     <div style="float:right;padding-right:16px;">
                         <div class="checkbox-primary">
-                            <label><input type="checkbox" id="newsId.value.id"  value="newsId.value.id"></label>
+                            <label><input name="deleteNewsCheckbox" type="checkbox" form="form1" value=${newsId.value.id}></label>
                         </div>
                     </div>
                     <h2><bean:write name="news" property="title"/></h2>
@@ -62,6 +62,11 @@
             </logic:iterate>
             <hr>
         </div>
+        <div style="float:right;padding-right:16px;">
+            <form name="news" id="form1" action="/TrulyNews/deleteSelectedNews.do" method="post">
+                <button type="submit" class="btn btn-danger">Delete selected</button>
+            </form>
+        </div>
     </div>
 </div>
 
@@ -69,18 +74,6 @@
     <p align="center">KazTrulyNews</br>
         EPAM Systems &copy; 2018</p>
 </footer>
-
-<script>
-    function deleteSelectedNews() {
-        for (var i = 0; i < newsTitle.length; i++) {
-            var checkbox = document.getElementById(newsId.value.id);
-            if (checkbox.checked){
-                checkedBoxesList.put(newsId.value.id);
-            }
-        }
-
-    }
-</script>
 
 </body>
 </html>
