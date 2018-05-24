@@ -1,6 +1,5 @@
-package kz.epam.intlab.instance;
+package kz.epam.intlab.entity;
 
-import org.apache.struts.action.ActionForm;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
@@ -9,7 +8,7 @@ import java.util.Date;
 
 @Entity
 @Table(name = "News")
-public class News extends ActionForm {
+public class News{
 
     private Integer id;
     private String title;

@@ -32,7 +32,7 @@
         <property name="show_sql">true</property>
 
         <!-- Drop and re-create the database schema on startup -->
-        <mapping class="kz.epam.intlab.instance.News"/>
+        <mapping class="kz.epam.intlab.entity.News"/>
 
     </session-factory>
 

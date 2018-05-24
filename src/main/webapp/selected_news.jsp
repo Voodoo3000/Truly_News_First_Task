@@ -20,7 +20,7 @@
     <div class="row content">
         <div class="col-sm-3 sidenav">
             <h4>TrulyNews</h4>
-            <a title="TrulyNews" href='<c:url value="/main.do"/>'>
+            <a title="TrulyNews" href='<c:url value="/newsAction.do?method=openMainPage"/>'>
                 <img src="static/pics/reporter.jpg">
             </a>
             <hr>
@@ -34,24 +34,24 @@
         </div>
 
         <div class="col-sm-9">
-            <html:form action="/openEditMode">
+            <html:form action="/newsAction?method=openEditNewsPage">
                 <h4>
                     <small>RECENT POSTS</small>
                 </h4>
                 <hr>
-                <h2><bean:write name="news" property="title"/></h2>
-                <h5><span class="glyphicon glyphicon-time"></span> <bean:write name="news" property="date"/>
+                <h2>${newsForm.title}</h2>
+                <h5><span class="glyphicon glyphicon-time"></span> ${newsForm.date}
                 </h5>
                 <h5><span class="label label-danger">Incidents</span> <span
                         class="label label-primary">Cataclysms</span>
                 </h5><br>
-                <h5><bean:write name="news" property="content"/></h5>
+                <h5>${newsForm.content}</h5>
                 <div style="float:left;padding-right:8px;">
-                    <button type="submit" class="btn btn-primary" name="id" value=${news.id}>Edit mode</button>
+                    <button type="submit" class="btn btn-primary" name="id" value=${newsForm.id}>Edit mode</button>
                 </div>
             </html:form>
-            <html:form action="/deleteNews">
-                <button type="submit" class="btn btn-danger" name="id" value=${news.id}>Delete</button>
+            <html:form action="/newsAction?method=deleteNews">
+                <button type="submit" class="btn btn-danger" name="id" value=${newsForm.id}>Delete</button>
             </html:form>
 
             <hr>

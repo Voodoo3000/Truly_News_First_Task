@@ -1,6 +1,6 @@
 package kz.epam.intlab.dao;
 
-import kz.epam.intlab.instance.News;
+import kz.epam.intlab.entity.News;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.boot.MetadataSources;
@@ -11,6 +11,8 @@ import java.sql.Connection;
 import java.util.*;
 
 public class DaoNews implements DaoService {
+
+    private static Map<Integer, News> newsTitle = new HashMap<>();
 
     private Connection connect;
     SessionFactory sessionFactory;
@@ -56,12 +58,12 @@ public class DaoNews implements DaoService {
     }
 
     @Override
-    public void addUpdateNews(News newsBean) {
+    public void addUpdateNews(News news) {
         session = sessionFactory.openSession();
         session.beginTransaction();
-        if (newsBean.getId() != 0) {
-            session.update(newsBean);
-        } else session.save(newsBean);
+        if (news.getId() != 0) {
+            session.update(news);
+        } else session.save(news);
         session.getTransaction().commit();
         session.close();
     }
@@ -74,4 +76,13 @@ public class DaoNews implements DaoService {
         session.getTransaction().commit();
         session.close();
     }
+
+    public static Map<Integer, News> getNewsTitle() {
+        return newsTitle;
+    }
+
+    public static void setNewsTitle(Map<Integer, News> newsTitle) {
+        DaoNews.newsTitle = newsTitle;
+    }
+
 }

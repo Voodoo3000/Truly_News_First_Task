@@ -20,7 +20,7 @@
     <div class="row content">
         <div class="col-sm-3 sidenav">
             <h4>TrulyNews</h4>
-            <a title="TrulyNews" href='<c:url value="/main.do"/>'>
+            <a title="TrulyNews" href='<c:url value="/newsAction.do?method=openMainPage"/>'>
                 <img src="static/pics/reporter.jpg">
             </a>
             <hr>
@@ -34,32 +34,32 @@
         </div>
 
         <div class="col-sm-9">
-            <html:form action="/addUpdateNews">
+            <html:form action="/newsAction?method=addUpdateNews">
                 <h4>
-                    <medium>Edit mode</medium>
+                    <medium>Add/Edit mode</medium>
                 </h4>
                 <hr>
                 <div>
                     Edit news date:
                 </div>
-                <html:textarea name="news" property="date" cols="150" rows="1"/>
+                <html:textarea name="newsForm" property="date" cols="150" rows="1"/>
                 <br>
                 <div>
                     Edit news title:
                 </div>
-                <html:textarea name="news" property="title" cols="150" rows="2"/>
+                <html:textarea name="newsForm" property="title" cols="150" rows="2"/>
                 <br>
                 <div>
                     Edit news brief:
                 </div>
-                <html:textarea name="news" property="brief" cols="150" rows="3"/>
+                <html:textarea name="newsForm" property="brief" cols="150" rows="3"/>
                 <br>
                 <div>
                     Edit news content:
                 </div>
-                <html:textarea name="news" property="content" cols="150" rows="20"/>
+                <html:textarea name="newsForm" property="content" cols="150" rows="20"/>
 
-                <button type="submit" class="btn btn-primary" name="id" value=${news.id}>Add/Edit news</button>
+                <button type="submit" class="btn btn-primary" name="id" value=${newsForm.id}>Add/Edit news</button>
                 <br><br>
             </html:form>
 

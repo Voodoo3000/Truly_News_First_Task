@@ -6,42 +6,25 @@
 <struts-config>
 
     <form-beans>
-        <form-bean name="news"
-                   type="kz.epam.intlab.instance.News"/>
+        <form-bean name="newsForm"
+                   type="kz.epam.intlab.form.NewsForm"/>
     </form-beans>
 
     <action-mappings>
-        <action path="/main"
-                type="kz.epam.intlab.action.OpenMainPageAction">
-            <forward name="success" path="/main.jsp"/>
-        </action>
-        <action path="/openSelectedNews"
-                type="kz.epam.intlab.action.OpenSelectedNewsAction"
-                name="news"
+        <action path="/newsAction"
+                type="kz.epam.intlab.action.NewsAction"
+                parameter="method"
+                name="newsForm"
                 input="main.jsp">
-            <forward name="success" path="/selected_news.jsp"/>
+            <forward name="main" path="/main.jsp"/>
+            <forward name="selected" path="/selected_news.jsp"/>
+            <forward name="edit" path="/edit_mode.jsp"/>
         </action>
-        <action path="/openEditMode"
-                type="kz.epam.intlab.action.OpenSelectedNewsAction"
-                name="news">
-            <forward name="success" path="/edit_mode.jsp"/>
-        </action>
-        <action path="/addUpdateNews"
-                type="kz.epam.intlab.action.AddUpdateNewsAction"
-                name="news">
-            <forward name="success" path="/selected_news.jsp"/>
-        </action>
-        <action path="/deleteNews"
-                type="kz.epam.intlab.action.DeleteNewsAction"
-                name="news">
-            <forward name="success" path="/main.do"/>
-        </action>
-        <action path="/deleteSelectedNews"
-                type="kz.epam.intlab.action.DeleteSelectedNews"
-                name="news"
-                input="main.jsp">
-            <forward name="success" path="/main.do"/>
-        </action>
+
+        <action path="/openAddNewsPage"
+                name="newsForm"
+                type="org.apache.struts.actions.ForwardAction"
+                parameter="/edit_mode.jsp"/>
     </action-mappings>
 
 </struts-config>

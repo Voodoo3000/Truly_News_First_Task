@@ -1,5 +1,6 @@
+<%@taglib uri="http://struts.apache.org/tags-logic" prefix="logic" %>
 <html>
 <body>
-<h2>Hello World!</h2>
+<logic:redirect action="/newsAction.do?method=openMainPage"/>
 </body>
 </html>

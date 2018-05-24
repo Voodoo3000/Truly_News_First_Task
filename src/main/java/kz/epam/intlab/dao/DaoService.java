@@ -1,6 +1,6 @@
 package kz.epam.intlab.dao;
 
-import kz.epam.intlab.instance.News;
+import kz.epam.intlab.entity.News;
 
 import java.util.Map;
 

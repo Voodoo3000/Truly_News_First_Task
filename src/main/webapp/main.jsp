@@ -21,7 +21,7 @@
     <div class="row content">
         <div class="col-sm-3 sidenav">
             <h4>TrulyNews</h4>
-            <a title="TrulyNews" href='<c:url value="/main.do"/>'>
+            <a title="TrulyNews" href='<c:url value="/newsAction.do?method=openMainPage"/>'>
                 <img src="static/pics/reporter.jpg">
             </a>
             <hr>
@@ -34,11 +34,11 @@
         </div>
         <br>
         <div style="float:right;padding-right:16px;">
-            <a href="/TrulyNews/edit_mode.jsp" type="button" class="btn btn-success">Add News</a>
+            <a href='<c:url value="/openAddNewsPage.do"/>' type="button" class="btn btn-success">Add News</a>
         </div>
         <div class="col-sm-9">
             <logic:iterate name="newsTitle" id="newsId">
-                <html:form action="/openSelectedNews">
+                <html:form action="/newsAction?method=openSelectedNews">
                     <bean:define id="news" name="newsId" property="value"/>
                     <h4>
                         <small>RECENT POSTS</small>
@@ -56,14 +56,14 @@
                             class="label label-primary">Cataclysms</span>
                     </h5><br>
                     <h5><bean:write name="news" property="brief"/></h5>
-                    <button type="submit" class="btn btn-info" name="id" value=${newsId.value.id}>Read more</button>
+                    <button type="submit" class="btn btn-info" name="id" value="${newsId.value.id}">Read more</button>
                     <br><br>
                 </html:form>
             </logic:iterate>
             <hr>
         </div>
         <div style="float:right;padding-right:16px;">
-            <form name="news" id="form1" action="/TrulyNews/deleteSelectedNews.do" method="post">
+            <form name="news" id="form1" action="/TrulyNews/newsAction.do?method=deleteNews" method="post">
                 <button type="submit" class="btn btn-danger">Delete selected</button>
             </form>
         </div>
