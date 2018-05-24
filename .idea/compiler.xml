@@ -6,11 +6,12 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
+        <module name="StrutsExample" />
         <module name="TrulyNews" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
-      <module name="TrulyNews" target="8" />
+      <module name="StrutsExample" target="1.7" />
     </bytecodeTargetLevel>
   </component>
 </project>
