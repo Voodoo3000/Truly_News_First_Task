@@ -1,20 +1,20 @@
 package kz.epam.intlab.entity;
 
 import org.hibernate.annotations.GenericGenerator;
-
 import javax.persistence.*;
-
-import java.util.Date;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
-@Table(name = "News")
+@Table(name = "NEWS")
 public class News{
 
     private Integer id;
     private String title;
     private String brief;
     private String content;
-    private String date = String.valueOf(new Date());
+    private String date;
+    private List<Comment> commentList = new ArrayList<>();
 
     @Id
     @GeneratedValue(generator="increment")

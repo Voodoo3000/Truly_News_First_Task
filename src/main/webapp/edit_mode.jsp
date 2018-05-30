@@ -21,7 +21,7 @@
         <div class="col-sm-3 sidenav">
             <h4>TrulyNews</h4>
             <a title="TrulyNews" href='<c:url value="/newsAction.do?method=openMainPage"/>'>
-                <img src="static/pics/reporter.jpg">
+                <img height="130px" src="static/pics/truly.png">
             </a>
             <hr>
             <ul class="nav nav-pills nav-stacked">
@@ -34,36 +34,54 @@
         </div>
 
         <div class="col-sm-9">
-            <html:form action="/newsAction?method=addUpdateNews">
+            <html:form action="/addUpNewsAct">
                 <h4>
                     <medium>Add/Edit mode</medium>
                 </h4>
                 <hr>
+                <html:messages id="err_password" property="message.date.err">
+                    <div style="color:red">
+                        <bean:write name="err_password" />
+                    </div>
+                </html:messages>
                 <div>
                     Edit news date:
                 </div>
-                <html:textarea name="newsForm" property="date" cols="150" rows="1"/>
-                <br>
+                <html:textarea name="newsForm" property="date" cols="150" rows="1" style="width: 100%"/>
+                <hr>
+                <html:messages id="err_title" property="message.title.err">
+                    <div style="color:red">
+                        <bean:write name="err_title" />
+                    </div>
+                </html:messages>
                 <div>
                     Edit news title:
                 </div>
-                <html:textarea name="newsForm" property="title" cols="150" rows="2"/>
-                <br>
+                <html:textarea name="newsForm" property="title" cols="150" rows="2" style="width: 100%"/>
+                <hr>
+                <html:messages id="err_brief" property="message.brief.err">
+                    <div style="color:red">
+                        <bean:write name="err_brief" />
+                    </div>
+                </html:messages>
                 <div>
                     Edit news brief:
                 </div>
-                <html:textarea name="newsForm" property="brief" cols="150" rows="3"/>
-                <br>
+                <html:textarea name="newsForm" property="brief" cols="150" rows="3" style="width: 100%"/>
+                <hr>
+                <html:messages id="err_content" property="message.content.err">
+                    <div style="color:red">
+                        <bean:write name="err_content" />
+                    </div>
+                </html:messages>
                 <div>
                     Edit news content:
                 </div>
-                <html:textarea name="newsForm" property="content" cols="150" rows="20"/>
+                <html:textarea name="newsForm" property="content" cols="150" rows="20" style="width: 100%"/>
 
                 <button type="submit" class="btn btn-primary" name="id" value=${newsForm.id}>Add/Edit news</button>
                 <br><br>
             </html:form>
-
-            <hr>
 
         </div>
     </div>

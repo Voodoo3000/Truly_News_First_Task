@@ -20,9 +20,8 @@
 <div class="container-fluid">
     <div class="row content">
         <div class="col-sm-3 sidenav">
-            <h4>TrulyNews</h4>
             <a title="TrulyNews" href='<c:url value="/newsAction.do?method=openMainPage"/>'>
-                <img src="static/pics/reporter.jpg">
+                <img height="130px" src="static/pics/truly.png">
             </a>
             <hr>
             <ul class="nav nav-pills nav-stacked">
@@ -33,8 +32,12 @@
             </ul>
         </div>
         <br>
+        <div style="float:left;padding-right:8px;padding-left:16px;">
+            <html:link page="/locale.do?method=english">English</html:link>
+        </div>
+        <html:link page="/locale.do?method=russian">Russian</html:link>
         <div style="float:right;padding-right:16px;">
-            <a href='<c:url value="/openAddNewsPage.do"/>' type="button" class="btn btn-success">Add News</a>
+            <a href='<c:url value="/openAddNewsPage.do"/>' type="button" class="btn btn-success"><bean:message key="label.button.add_news"/></a>
         </div>
         <div class="col-sm-9">
             <logic:iterate name="newsTitle" id="newsId">
@@ -46,7 +49,7 @@
                     <hr>
                     <div style="float:right;padding-right:16px;">
                         <div class="checkbox-primary">
-                            <label><input name="deleteNewsCheckbox" type="checkbox" form="form1" value=${newsId.value.id}></label>
+                            <label><input name="deleteNewsCheckbox" type="checkbox" form="form1" value=${newsId.value.id}> Deletion label</label>
                         </div>
                     </div>
                     <h2><bean:write name="news" property="title"/></h2>
@@ -56,15 +59,15 @@
                             class="label label-primary">Cataclysms</span>
                     </h5><br>
                     <h5><bean:write name="news" property="brief"/></h5>
-                    <button type="submit" class="btn btn-info" name="id" value="${newsId.value.id}">Read more</button>
+                    <button type="submit" class="btn btn-info" name="id" value="${newsId.value.id}"><bean:message key="label.button.read_more"/></button>
                     <br><br>
                 </html:form>
             </logic:iterate>
             <hr>
         </div>
-        <div style="float:right;padding-right:16px;">
+        <div style="float:right;padding-right:16px; padding-bottom: 16px">
             <form name="news" id="form1" action="/TrulyNews/newsAction.do?method=deleteNews" method="post">
-                <button type="submit" class="btn btn-danger">Delete selected</button>
+                <button type="submit" class="btn btn-danger"><bean:message key="label.button.delete_selected_news"/></button>
             </form>
         </div>
     </div>

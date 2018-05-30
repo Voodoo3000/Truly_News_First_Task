@@ -11,20 +11,39 @@
     </form-beans>
 
     <action-mappings>
+        <action path="/addUpNewsAct"
+                type="kz.epam.intlab.action.AddUpdateNewsAction"
+                name="newsForm"
+                validate="true"
+                input="/edit_mode.jsp">
+            <forward name="main" path="/newsAction.do?method=openMainPage"/>
+        </action>
+
         <action path="/newsAction"
                 type="kz.epam.intlab.action.NewsAction"
                 parameter="method"
                 name="newsForm"
-                input="main.jsp">
+                validate="false">
             <forward name="main" path="/main.jsp"/>
             <forward name="selected" path="/selected_news.jsp"/>
             <forward name="edit" path="/edit_mode.jsp"/>
         </action>
 
         <action path="/openAddNewsPage"
-                name="newsForm"
                 type="org.apache.struts.actions.ForwardAction"
                 parameter="/edit_mode.jsp"/>
+
+        <action
+                path="/locale"
+                type="kz.epam.intlab.action.ChangeLanguageAction"
+                name="newsForm"
+                parameter="method"
+                validate="false">
+            <forward name="main" path="/main.jsp"/>
+        </action>
     </action-mappings>
+
+    <message-resources
+            parameter="i18n.message" />
 
 </struts-config>

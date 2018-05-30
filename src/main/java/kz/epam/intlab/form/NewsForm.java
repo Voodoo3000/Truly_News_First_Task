@@ -1,7 +1,9 @@
 package kz.epam.intlab.form;
 
+import org.apache.struts.action.ActionErrors;
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionMapping;
+import org.apache.struts.action.ActionMessage;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.Date;
@@ -12,8 +14,7 @@ public class NewsForm extends ActionForm {
     private String title;
     private String brief;
     private String content;
-    private String date = String.valueOf(new Date());
-    //News news;
+    private String date;
 
     public Integer getId() {
         return id;
@@ -56,19 +57,41 @@ public class NewsForm extends ActionForm {
     }
 
     @Override
+    public ActionErrors validate(ActionMapping mapping, HttpServletRequest request) {
+
+        ActionErrors errors = new ActionErrors();
+
+        if(getDate() == null ||  getDate().equals(""))
+        {
+            errors.add("message.date.err",
+                    new ActionMessage("label.message.error_date"));
+        }
+        if(getTitle() == null ||  getTitle().equals(""))
+        {
+            errors.add("message.title.err",
+                    new ActionMessage("label.message.error_title"));
+        }
+        if(getBrief() == null ||  getBrief().equals(""))
+        {
+            errors.add("message.brief.err",
+                    new ActionMessage("label.message.error_brief"));
+        }
+        if(getContent() == null ||  getContent().equals(""))
+        {
+            errors.add("message.content.err",
+                    new ActionMessage("label.message.error_content"));
+        }
+
+        return errors;
+    }
+
+    @Override
     public void reset(ActionMapping mapping, HttpServletRequest request) {
         super.reset(mapping, request);
-        setDate("");
+        setDate(String.valueOf(new Date()));
         setTitle("");
         setBrief("");
         setContent("");
         setId(0);
     }
-    //    public News getNews() {
-//        return news;
-//    }
-//
-//    public void setNews(News news) {
-//        this.news = news;
-//    }
 }
