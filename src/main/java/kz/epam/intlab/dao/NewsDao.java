@@ -1,14 +1,11 @@
 package kz.epam.intlab.dao;
 
 import kz.epam.intlab.entity.News;
+import kz.epam.intlab.util.HibernateSessionFactory;
 import org.apache.log4j.Logger;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
-import org.hibernate.boot.MetadataSources;
-import org.hibernate.boot.registry.StandardServiceRegistry;
-import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
-
 
 import java.util.*;
 
@@ -16,22 +13,11 @@ public class NewsDao implements Dao {
 
     private static final Logger LOGGER = Logger.getLogger(NewsDao.class);
 
-    SessionFactory sessionFactory;
-    Session session;
+    private SessionFactory sessionFactory;
+    private Session session;
 
-    public NewsDao() {
-        // A SessionFactory is set up once for an application!
-        final StandardServiceRegistry registry = new StandardServiceRegistryBuilder()
-                .configure() // configures settings from hibernate.cfg.xml
-                .build();
-        try {
-            sessionFactory = new MetadataSources(registry).buildMetadata().buildSessionFactory();
-        } catch (Exception e) {
-            e.printStackTrace();
-            // The registry would be destroyed by the SessionFactory, but we had trouble building the SessionFactory
-            // so destroy it manually.
-            StandardServiceRegistryBuilder.destroy(registry);
-        }
+    public NewsDao(HibernateSessionFactory hibernateSessionFactory) {
+        sessionFactory = hibernateSessionFactory.getSessionFactory();
     }
 
     public Map<Integer, News> getAllNews() throws DaoException {

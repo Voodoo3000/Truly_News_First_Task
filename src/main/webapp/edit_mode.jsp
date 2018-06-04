@@ -19,7 +19,6 @@
 <div class="container-fluid">
     <div class="row content">
         <div class="col-sm-3 sidenav">
-            <h4>TrulyNews</h4>
             <a title="TrulyNews" href='<c:url value="/newsAction.do?method=openMainPage"/>'>
                 <img height="130px" src="static/pics/truly.png">
             </a>

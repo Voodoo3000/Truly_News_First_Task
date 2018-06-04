@@ -35,4 +35,8 @@
     <url-pattern>*.do</url-pattern>
   </servlet-mapping>
 
+  <listener>
+    <listener-class>kz.epam.intlab.listener.ContextListener</listener-class>
+  </listener>
+
 </web-app>
