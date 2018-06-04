@@ -19,7 +19,6 @@
 <div class="container-fluid">
     <div class="row content">
         <div class="col-sm-3 sidenav">
-            <h4>TrulyNews</h4>
             <a title="TrulyNews" href='<c:url value="/newsAction.do?method=openMainPage"/>'>
                 <img height="130px" src="static/pics/truly.png">
             </a>
@@ -47,7 +46,7 @@
                 <div>
                     Edit news date:
                 </div>
-                <html:textarea name="newsForm" property="date" cols="150" rows="1" style="width: 100%"/>
+                <html:textarea name="newsForm" property="date" cols="150" rows="1" style="width: 100%; border-radius: 3px"/>
                 <hr>
                 <html:messages id="err_title" property="message.title.err">
                     <div style="color:red">
@@ -57,7 +56,7 @@
                 <div>
                     Edit news title:
                 </div>
-                <html:textarea name="newsForm" property="title" cols="150" rows="2" style="width: 100%"/>
+                <html:textarea name="newsForm" property="title" cols="150" rows="2" style="width: 100%; border-radius: 3px"/>
                 <hr>
                 <html:messages id="err_brief" property="message.brief.err">
                     <div style="color:red">
@@ -67,7 +66,7 @@
                 <div>
                     Edit news brief:
                 </div>
-                <html:textarea name="newsForm" property="brief" cols="150" rows="3" style="width: 100%"/>
+                <html:textarea name="newsForm" property="brief" cols="150" rows="3" style="width: 100%; border-radius: 3px"/>
                 <hr>
                 <html:messages id="err_content" property="message.content.err">
                     <div style="color:red">
@@ -77,7 +76,7 @@
                 <div>
                     Edit news content:
                 </div>
-                <html:textarea name="newsForm" property="content" cols="150" rows="20" style="width: 100%"/>
+                <html:textarea name="newsForm" property="content" cols="150" rows="20" style="width: 100%; border-radius: 3px"/>
 
                 <button type="submit" class="btn btn-primary" name="id" value=${newsForm.id}>Add/Edit news</button>
                 <br><br>

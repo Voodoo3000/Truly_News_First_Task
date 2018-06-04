@@ -14,6 +14,8 @@ public class News{
     private String brief;
     private String content;
     private String date;
+
+
     private List<Comment> commentList = new ArrayList<>();
 
     @Id
@@ -61,5 +63,22 @@ public class News{
 
     public void setDate(String date) {
         this.date = date;
+    }
+
+    @OneToMany(mappedBy="news", fetch = FetchType.EAGER)
+    @ElementCollection(targetClass=Comment.class)
+    public List<Comment> getCommentList() {
+        return commentList;
+    }
+
+    public void setCommentList(List<Comment> commentList) {
+        this.commentList = commentList;
+    }
+
+    @Override
+    public String toString() {
+        return "News{" +
+                "commentList=" + commentList +
+                '}';
     }
 }

@@ -37,6 +37,7 @@ public class NewsDao implements Dao {
     public Map<Integer, News> getAllNews() throws DaoException {
         Map<Integer, News> newsTitle = new HashMap<>();
         try {
+            System.out.println(sessionFactory);
             session = sessionFactory.openSession();
             session.beginTransaction();
             List result = session.createQuery("from News").list();

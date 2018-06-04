@@ -4,13 +4,20 @@
         "http://jakarta.apache.org/struts/dtds/struts-config_1_3.dtd">
 
 <struts-config>
-
     <form-beans>
         <form-bean name="newsForm"
                    type="kz.epam.intlab.form.NewsForm"/>
     </form-beans>
 
     <action-mappings>
+        <action path="/addUpCommAct"
+                type="kz.epam.intlab.action.AddUpdateCommentAction"
+                name="newsForm"
+                validate="false"
+                input="selected_news.jsp">
+            <forward name="selected" path="/newsAction.do?method=openMainPage"/>
+        </action>
+
         <action path="/addUpNewsAct"
                 type="kz.epam.intlab.action.AddUpdateNewsAction"
                 name="newsForm"
@@ -45,5 +52,4 @@
 
     <message-resources
             parameter="i18n.message" />
-
 </struts-config>

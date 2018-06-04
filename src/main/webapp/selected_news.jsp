@@ -19,7 +19,6 @@
 <div class="container-fluid">
     <div class="row content">
         <div class="col-sm-3 sidenav">
-            <h4>TrulyNews</h4>
             <a title="TrulyNews" href='<c:url value="/newsAction.do?method=openMainPage"/>'>
                 <img height="130px" src="static/pics/truly.png">
             </a>
@@ -53,17 +52,17 @@
             <html:form action="/newsAction?method=deleteNews">
                 <button type="submit" class="btn btn-danger" name="id" value=${newsForm.id}>Delete</button>
             </html:form>
-
             <hr>
-
-            <h4>Leave a Comment:</h4>
-            <form role="form">
+            <html:form action="/addUpCommAct">
                 <div class="form-group">
-                    <textarea class="form-control" rows="3" required></textarea>
+                    <html:hidden property="id" value="${newsForm.id}"/>
+                    <h4>Enter your login-email:</h4>
+                    <html:textarea name="newsForm" property="commentAuthor" rows="1" style="width: 33%; border-radius: 3px"/>
+                    <h4>Leave a Comment:</h4>
+                    <html:textarea name="newsForm" property="commentContent" rows="3" style="width: 100%; border-radius: 3px"/>
                 </div>
-                <button type="submit" class="btn btn-success">Submit</button>
-            </form>
-
+                <button type="submit" class="btn btn-success" >Submit</button>
+            </html:form>
         </div>
     </div>
 </div>

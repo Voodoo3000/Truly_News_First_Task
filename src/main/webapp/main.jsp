@@ -59,7 +59,7 @@
                             class="label label-primary">Cataclysms</span>
                     </h5><br>
                     <h5><bean:write name="news" property="brief"/></h5>
-                    <button type="submit" class="btn btn-info" name="id" value="${newsId.value.id}"><bean:message key="label.button.read_more"/></button>
+                    <button type="submit" class="btn btn-info" name="id" value=${newsId.value.id}><bean:message key="label.button.read_more"/></button>
                     <br><br>
                 </html:form>
             </logic:iterate>

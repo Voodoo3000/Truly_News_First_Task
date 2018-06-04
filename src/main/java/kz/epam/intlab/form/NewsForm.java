@@ -16,6 +16,26 @@ public class NewsForm extends ActionForm {
     private String content;
     private String date;
 
+    private int commentId;
+    private String commentContent;
+    private String commentDate;
+    private String commentAuthor;
+
+    @Override
+    public void reset(ActionMapping mapping, HttpServletRequest request) {
+        super.reset(mapping, request);
+        setDate(String.valueOf(new Date()));
+        setTitle("");
+        setBrief("");
+        setContent("");
+        setId(0);
+
+        setCommentId(0);
+        setCommentContent("");
+        setCommentDate(String.valueOf(new Date()));
+        setCommentAuthor("");
+    }
+
     public Integer getId() {
         return id;
     }
@@ -56,6 +76,38 @@ public class NewsForm extends ActionForm {
         this.date = date;
     }
 
+    public int getCommentId() {
+        return commentId;
+    }
+
+    public void setCommentId(int commentId) {
+        this.commentId = commentId;
+    }
+
+    public String getCommentContent() {
+        return commentContent;
+    }
+
+    public void setCommentContent(String commentContent) {
+        this.commentContent = commentContent;
+    }
+
+    public String getCommentDate() {
+        return commentDate;
+    }
+
+    public void setCommentDate(String commentDate) {
+        this.commentDate = commentDate;
+    }
+
+    public String getCommentAuthor() {
+        return commentAuthor;
+    }
+
+    public void setCommentAuthor(String commentAuthor) {
+        this.commentAuthor = commentAuthor;
+    }
+
     @Override
     public ActionErrors validate(ActionMapping mapping, HttpServletRequest request) {
 
@@ -81,17 +133,6 @@ public class NewsForm extends ActionForm {
             errors.add("message.content.err",
                     new ActionMessage("label.message.error_content"));
         }
-
         return errors;
-    }
-
-    @Override
-    public void reset(ActionMapping mapping, HttpServletRequest request) {
-        super.reset(mapping, request);
-        setDate(String.valueOf(new Date()));
-        setTitle("");
-        setBrief("");
-        setContent("");
-        setId(0);
     }
 }

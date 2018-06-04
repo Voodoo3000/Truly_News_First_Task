@@ -33,6 +33,7 @@
 
         <!-- Drop and re-create the database schema on startup -->
         <mapping class="kz.epam.intlab.entity.News"/>
+        <mapping class="kz.epam.intlab.entity.Comment"/>
 
     </session-factory>
 

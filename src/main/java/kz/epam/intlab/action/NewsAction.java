@@ -20,6 +20,7 @@ public class NewsAction extends DispatchAction {
 
     public ActionForward openMainPage(ActionMapping mapping, ActionForm form,
                                       HttpServletRequest request, HttpServletResponse response) throws ActionException {
+        form.reset(mapping, request);
         try {
             request.getSession().setAttribute("newsTitle", newsDao.getAllNews());
             LOGGER.info("Getting all news on main page");
