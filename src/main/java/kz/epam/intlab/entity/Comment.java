@@ -47,7 +47,7 @@ public class Comment {
         this.commentDate = commentDate;
     }
 
-    @Column(name = "READER")
+    @Column(name = "AUTHOR")
     public String getCommentAuthor() {
         return commentAuthor;
     }

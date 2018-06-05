@@ -22,7 +22,6 @@ public class AddUpdateCommentAction extends Action {
                                   HttpServletRequest request, HttpServletResponse response) throws ActionException {
 
         NewsForm newsForm = (NewsForm) form;
-        System.out.println(newsForm.getId());
         NewsDao newsDao = new NewsDao();
         News news;
         try {
@@ -33,17 +32,13 @@ public class AddUpdateCommentAction extends Action {
         }
 
         Comment comment = new Comment();
-        comment.setId(newsForm.getCommentId());
         comment.setNewsId(newsForm.getId());
         comment.setCommentDate(newsForm.getCommentDate());
         comment.setCommentAuthor(newsForm.getCommentAuthor());
         comment.setCommentContent(newsForm.getCommentContent());
-        //comment.setNews(news);
 
-        System.out.println(comment.toString());
         news.getCommentList().add(comment);
 
-        System.out.println(news.toString());
         try {
             newsDao.addUpdateNews(news);
             LOGGER.info("Adding comment");

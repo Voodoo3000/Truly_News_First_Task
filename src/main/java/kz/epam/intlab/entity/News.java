@@ -15,12 +15,12 @@ public class News{
     private String content;
     private String date;
 
-
     private List<Comment> commentList = new ArrayList<>();
 
     @Id
     @GeneratedValue(generator="increment")
     @GenericGenerator(name="increment", strategy = "increment")
+    @Column(name = "NEWS_ID")
     public Integer getId() {
         return id;
     }
@@ -65,8 +65,7 @@ public class News{
         this.date = date;
     }
 
-    @OneToMany(mappedBy="news", fetch = FetchType.EAGER)
-    @ElementCollection(targetClass=Comment.class)
+    @OneToMany(mappedBy="news", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     public List<Comment> getCommentList() {
         return commentList;
     }
