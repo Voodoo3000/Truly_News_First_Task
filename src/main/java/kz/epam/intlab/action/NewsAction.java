@@ -4,6 +4,7 @@ import kz.epam.intlab.dao.DaoException;
 import kz.epam.intlab.dao.NewsDao;
 import kz.epam.intlab.entity.News;
 import kz.epam.intlab.form.NewsForm;
+import kz.epam.intlab.listener.ContextListener;
 import org.apache.log4j.Logger;
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
@@ -15,7 +16,7 @@ import javax.servlet.http.HttpServletResponse;
 
 public class NewsAction extends DispatchAction {
 
-    private NewsDao newsDao = new NewsDao();
+    private NewsDao newsDao = ContextListener.getCtx().getBean(NewsDao.class);
     private static final Logger LOGGER = Logger.getLogger(NewsAction.class);
 
     public ActionForward openMainPage(ActionMapping mapping, ActionForm form,
