@@ -63,6 +63,13 @@
                 </div>
                 <button type="submit" class="btn btn-success" >Submit</button>
             </html:form>
+            <hr>
+            <logic:iterate name="newsForm" property="formComments" id="comment">
+                <h5>${comment.commentAuthor}</h5>
+                <h6><span class="glyphicon glyphicon-time"></span>${comment.commentDate}</h6>
+                <h4>${comment.commentContent}</h4>
+                <br>
+            </logic:iterate>
         </div>
     </div>
 </div>

@@ -12,4 +12,7 @@
 
     <bean id="hibernateSessionFactory" class="kz.epam.intlab.util.HibernateSessionFactory"/>
 
+    <bean id="comment" class="kz.epam.intlab.entity.Comment" scope="prototype"/>
+
+    <bean id="news" class="kz.epam.intlab.entity.News"/>
 </beans>

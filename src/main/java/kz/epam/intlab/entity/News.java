@@ -1,5 +1,6 @@
 package kz.epam.intlab.entity;
 
+import kz.epam.intlab.parent.AbstractParentForEntityAndDTO;
 import org.hibernate.annotations.GenericGenerator;
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -7,7 +8,7 @@ import java.util.List;
 
 @Entity
 @Table(name = "NEWS")
-public class News{
+public class News extends AbstractParentForEntityAndDTO {
 
     private Integer id;
     private String title;

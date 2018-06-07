@@ -23,7 +23,7 @@ public class AddUpdateNewsAction extends Action {
                                        HttpServletRequest request, HttpServletResponse response) throws ActionException {
 
         NewsForm newsForm = (NewsForm) form;
-        News news = new News();
+        News news = ContextListener.getCtx().getBean(News.class);
         news.setId(newsForm.getId());
         news.setTitle(newsForm.getTitle());
         news.setBrief(newsForm.getBrief());

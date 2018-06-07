@@ -1,12 +1,15 @@
 package kz.epam.intlab.form;
 
+import kz.epam.intlab.entity.Comment;
 import org.apache.struts.action.ActionErrors;
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionMapping;
 import org.apache.struts.action.ActionMessage;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 public class NewsForm extends ActionForm {
 
@@ -21,6 +24,8 @@ public class NewsForm extends ActionForm {
     private String commentDate;
     private String commentAuthor;
 
+    private List<Comment> formComments = new ArrayList<>();
+
     @Override
     public void reset(ActionMapping mapping, HttpServletRequest request) {
         super.reset(mapping, request);
@@ -34,6 +39,9 @@ public class NewsForm extends ActionForm {
         setCommentContent("");
         setCommentDate(String.valueOf(new Date()));
         setCommentAuthor("");
+
+        formComments.clear();
+        System.out.println("RESET WAS CALLED");
     }
 
     public Integer getId() {
@@ -106,6 +114,14 @@ public class NewsForm extends ActionForm {
 
     public void setCommentAuthor(String commentAuthor) {
         this.commentAuthor = commentAuthor;
+    }
+
+    public List<Comment> getFormComments() {
+        return formComments;
+    }
+
+    public void setFormComments(List<Comment> formComments) {
+        this.formComments = formComments;
     }
 
     @Override

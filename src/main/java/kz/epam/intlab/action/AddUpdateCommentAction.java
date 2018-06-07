@@ -5,6 +5,7 @@ import kz.epam.intlab.dao.NewsDao;
 import kz.epam.intlab.entity.Comment;
 import kz.epam.intlab.entity.News;
 import kz.epam.intlab.form.NewsForm;
+import kz.epam.intlab.listener.ContextListener;
 import org.apache.log4j.Logger;
 import org.apache.struts.action.Action;
 import org.apache.struts.action.ActionForm;
@@ -22,8 +23,8 @@ public class AddUpdateCommentAction extends Action {
                                   HttpServletRequest request, HttpServletResponse response) throws ActionException {
 
         NewsForm newsForm = (NewsForm) form;
-        NewsDao newsDao = new NewsDao();
         News news;
+        NewsDao newsDao = ContextListener.getCtx().getBean(NewsDao.class);
         try {
             news = newsDao.getNewsById(newsForm.getId());
         } catch (DaoException e) {
@@ -31,7 +32,7 @@ public class AddUpdateCommentAction extends Action {
             throw new ActionException(e);
         }
 
-        Comment comment = new Comment();
+        Comment comment = ContextListener.getCtx().getBean(Comment.class);
         comment.setNewsId(newsForm.getId());
         comment.setCommentDate(newsForm.getCommentDate());
         comment.setCommentAuthor(newsForm.getCommentAuthor());

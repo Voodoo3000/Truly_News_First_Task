@@ -15,7 +15,7 @@
                 name="newsForm"
                 validate="false"
                 input="selected_news.jsp">
-            <forward name="selected" path="/newsAction.do?method=openMainPage"/>
+            <forward name="selected" path="/newsAction.do?method=openSelectedNews"/>
         </action>
 
         <action path="/addUpNewsAct"

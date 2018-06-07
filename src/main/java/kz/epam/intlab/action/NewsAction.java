@@ -2,6 +2,7 @@ package kz.epam.intlab.action;
 
 import kz.epam.intlab.dao.DaoException;
 import kz.epam.intlab.dao.NewsDao;
+import kz.epam.intlab.entity.Comment;
 import kz.epam.intlab.entity.News;
 import kz.epam.intlab.form.NewsForm;
 import kz.epam.intlab.listener.ContextListener;
@@ -21,6 +22,7 @@ public class NewsAction extends DispatchAction {
 
     public ActionForward openMainPage(ActionMapping mapping, ActionForm form,
                                       HttpServletRequest request, HttpServletResponse response) throws ActionException {
+        System.out.println("MANUAL RESET");
         form.reset(mapping, request);
         try {
             request.getSession().setAttribute("newsTitle", newsDao.getAllNews());
@@ -36,13 +38,12 @@ public class NewsAction extends DispatchAction {
                                           HttpServletRequest request, HttpServletResponse response) throws ActionException {
 
         NewsForm newsForm = (NewsForm) form;
+        int id = newsForm.getId();
+        newsForm.reset(mapping, request);
+        newsForm.setId(id);
+
         try {
-            News news = newsDao.getNewsById(newsForm.getId());
-            newsForm.setId(news.getId());
-            newsForm.setTitle(news.getTitle());
-            newsForm.setBrief(news.getBrief());
-            newsForm.setContent(news.getContent());
-            newsForm.setDate(news.getDate());
+            setNewsEntityInForm(newsForm);
             LOGGER.info("Getting selected news");
         } catch (DaoException e) {
             LOGGER.error("DaoException in openSelectedNews", e);
@@ -51,17 +52,26 @@ public class NewsAction extends DispatchAction {
         return mapping.findForward("selected");
     }
 
+    private void setNewsEntityInForm(NewsForm newsForm) throws DaoException {
+
+        News news = newsDao.getNewsById(newsForm.getId());
+        newsForm.setId(news.getId());
+        newsForm.setTitle(news.getTitle());
+        newsForm.setBrief(news.getBrief());
+        newsForm.setContent(news.getContent());
+        newsForm.setDate(news.getDate());
+
+        for (Comment comment: news.getCommentList()) {
+            newsForm.getFormComments().add(comment);
+        }
+    }
+
     public ActionForward openEditNewsPage(ActionMapping mapping, ActionForm form,
                                           HttpServletRequest request, HttpServletResponse response) throws ActionException {
 
         NewsForm newsForm = (NewsForm) form;
         try {
-            News news = newsDao.getNewsById(newsForm.getId());
-            newsForm.setId(news.getId());
-            newsForm.setTitle(news.getTitle());
-            newsForm.setBrief(news.getBrief());
-            newsForm.setContent(news.getContent());
-            newsForm.setDate(news.getDate());
+            setNewsEntityInForm(newsForm);
             LOGGER.info("Getting selected news to edit mode page");
         } catch (DaoException e) {
             LOGGER.error("DaoException in openEditNewsPage", e);
