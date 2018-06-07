@@ -1,11 +1,14 @@
 package kz.epam.intlab.action;
 
+import kz.epam.intlab.converter.NewsFormDTOConverter;
 import kz.epam.intlab.dao.DaoException;
 import kz.epam.intlab.dao.NewsDao;
+import kz.epam.intlab.dto.NewsDTO;
 import kz.epam.intlab.entity.Comment;
 import kz.epam.intlab.entity.News;
 import kz.epam.intlab.form.NewsForm;
 import kz.epam.intlab.listener.ContextListener;
+import kz.epam.intlab.service.DDDService;
 import org.apache.log4j.Logger;
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
@@ -17,15 +20,16 @@ import javax.servlet.http.HttpServletResponse;
 
 public class NewsAction extends DispatchAction {
 
+    NewsFormDTOConverter newsFormDTOConverter = new NewsFormDTOConverter();
+    private DDDService service = new DDDService();
     private NewsDao newsDao = ContextListener.getCtx().getBean(NewsDao.class);
     private static final Logger LOGGER = Logger.getLogger(NewsAction.class);
 
     public ActionForward openMainPage(ActionMapping mapping, ActionForm form,
                                       HttpServletRequest request, HttpServletResponse response) throws ActionException {
-        System.out.println("MANUAL RESET");
-        form.reset(mapping, request);
+
         try {
-            request.getSession().setAttribute("newsTitle", newsDao.getAllNews());
+            request.getSession().setAttribute("newsTitle", service.getAllNewsService());
             LOGGER.info("Getting all news on main page");
         } catch (DaoException e) {
             LOGGER.error("DaoException in openMainPageAvtion", e);
@@ -35,20 +39,11 @@ public class NewsAction extends DispatchAction {
     }
 
     public ActionForward openSelectedNews(ActionMapping mapping, ActionForm form,
-                                          HttpServletRequest request, HttpServletResponse response) throws ActionException {
+                                          HttpServletRequest request, HttpServletResponse response) throws ActionException, DaoException {
 
         NewsForm newsForm = (NewsForm) form;
-        int id = newsForm.getId();
-        newsForm.reset(mapping, request);
-        newsForm.setId(id);
+        newsFormDTOConverter.convertSomeDTOToNewsForm(newsForm, service.getNewsById(newsForm.getId()));
 
-        try {
-            setNewsEntityInForm(newsForm);
-            LOGGER.info("Getting selected news");
-        } catch (DaoException e) {
-            LOGGER.error("DaoException in openSelectedNews", e);
-            throw new ActionException(e);
-        }
         return mapping.findForward("selected");
     }
 
@@ -82,7 +77,6 @@ public class NewsAction extends DispatchAction {
 
     public ActionForward deleteNews(ActionMapping mapping, ActionForm form,
                                     HttpServletRequest request, HttpServletResponse response) throws ActionException {
-
         try {
             if ((request.getParameterValues("deleteNewsCheckbox")) != null) {
                 String[] parameterValues = request.getParameterValues("deleteNewsCheckbox");

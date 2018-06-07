@@ -23,7 +23,7 @@
                 name="newsForm"
                 validate="true"
                 input="/edit_mode.jsp">
-            <forward name="main" path="/newsAction.do?method=openMainPage"/>
+            <forward name="main" path="/newsAction.do?method=openMainPage" redirect="true"/>
         </action>
 
         <action path="/newsAction"
