@@ -1,8 +1,9 @@
-<!DOCTYPE web-app PUBLIC
-        "-//Sun Microsystems, Inc.//DTD Web Application 2.3//EN"
-        "http://java.sun.com/dtd/web-app_2_3.dtd" >
-
-<web-app>
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xmlns="http://java.sun.com/xml/ns/javaee"
+         xsi:schemaLocation="http://java.sun.com/xml/ns/javaee
+        http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"
+         version="3.0">
   <display-name>TrulyNews</display-name>
 
   <servlet>
@@ -19,9 +20,35 @@
     <load-on-startup>1</load-on-startup>
   </servlet>
 
+  <filter>
+    <filter-name>CharsetFilter</filter-name>
+    <filter-class>kz.epam.intlab.filter.CharsetFilter</filter-class>
+  </filter>
+  <filter-mapping>
+    <filter-name>CharsetFilter</filter-name>
+    <url-pattern>*.do</url-pattern>
+    <dispatcher>REQUEST</dispatcher>
+  </filter-mapping>
+
   <servlet-mapping>
     <servlet-name>action</servlet-name>
     <url-pattern>*.do</url-pattern>
   </servlet-mapping>
+
+  <context-param>
+    <param-name>contextClass</param-name>
+    <param-value>
+      org.springframework.web.context.support.AnnotationConfigWebApplicationContext
+    </param-value>
+  </context-param>
+
+  <context-param>
+    <param-name>contextConfigLocation</param-name>
+    <param-value>kz.epam.intlab.spring.AppConfig</param-value>
+  </context-param>
+
+  <listener>
+    <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+  </listener>
 
 </web-app>
