@@ -34,14 +34,14 @@
             <forward name="main" path="/main.jsp"/>
             <forward name="selected" path="/selected_news.jsp"/>
             <forward name="edit" path="/edit_mode.jsp"/>
+            <forward name="openMainAct" path="/newsAction.do?method=openMainPage" redirect="true"/>
         </action>
 
         <action path="/openAddNewsPage"
                 type="org.apache.struts.actions.ForwardAction"
                 parameter="/edit_mode.jsp"/>
 
-        <action
-                path="/locale"
+        <action path="/locale"
                 type="kz.epam.intlab.action.ChangeLanguageAction"
                 name="newsForm"
                 parameter="method"
@@ -50,6 +50,6 @@
         </action>
     </action-mappings>
 
-    <message-resources
-            parameter="i18n.message" />
+    <message-resources parameter="i18n.message" />
+
 </struts-config>

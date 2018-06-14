@@ -1,64 +1,64 @@
 package kz.epam.intlab.action;
 
-import kz.epam.intlab.converter.NewsFormDTOConverter;
+import kz.epam.intlab.converter.FormDTOConverter;
+import kz.epam.intlab.converter.NewsFormDTOConverterImpl;
 import kz.epam.intlab.dao.DaoException;
-import kz.epam.intlab.dao.NewsDao;
-import kz.epam.intlab.dto.NewsDTO;
-import kz.epam.intlab.entity.Comment;
-import kz.epam.intlab.entity.News;
 import kz.epam.intlab.form.NewsForm;
 import kz.epam.intlab.listener.ContextListener;
 import kz.epam.intlab.service.DDDService;
+import kz.epam.intlab.service.Service;
 import org.apache.log4j.Logger;
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 import org.apache.struts.actions.DispatchAction;
+import org.springframework.web.struts.DispatchActionSupport;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-public class NewsAction extends DispatchAction {
+public class NewsAction extends DispatchActionSupport {
 
-    NewsFormDTOConverter newsFormDTOConverter = new NewsFormDTOConverter();
-    private DDDService service = new DDDService();
-    private NewsDao newsDao = ContextListener.getCtx().getBean(NewsDao.class);
+    private Service service;
+    private FormDTOConverter formDTOConverter;
+
+    @Override
+    protected void onInit() {
+         super.onInit();
+         service = (Service) getWebApplicationContext().getBean("service");
+         formDTOConverter = getWebApplicationContext().getBean(NewsFormDTOConverterImpl.class);
+    }
+
     private static final Logger LOGGER = Logger.getLogger(NewsAction.class);
 
     public ActionForward openMainPage(ActionMapping mapping, ActionForm form,
                                       HttpServletRequest request, HttpServletResponse response) throws ActionException {
-
         try {
             request.getSession().setAttribute("newsTitle", service.getAllNewsService());
             LOGGER.info("Getting all news on main page");
         } catch (DaoException e) {
-            LOGGER.error("DaoException in openMainPageAvtion", e);
+            LOGGER.error("DaoException in openMainPageAction", e);
             throw new ActionException(e);
         }
         return mapping.findForward("main");
     }
 
     public ActionForward openSelectedNews(ActionMapping mapping, ActionForm form,
-                                          HttpServletRequest request, HttpServletResponse response) throws ActionException, DaoException {
+                                          HttpServletRequest request, HttpServletResponse response) throws ActionException {
 
         NewsForm newsForm = (NewsForm) form;
-        newsFormDTOConverter.convertSomeDTOToNewsForm(newsForm, service.getNewsById(newsForm.getId()));
+        int id = newsForm.getId();
+        newsForm.reset(mapping, request);
+        newsForm.setId(id);
 
-        return mapping.findForward("selected");
-    }
-
-    private void setNewsEntityInForm(NewsForm newsForm) throws DaoException {
-
-        News news = newsDao.getNewsById(newsForm.getId());
-        newsForm.setId(news.getId());
-        newsForm.setTitle(news.getTitle());
-        newsForm.setBrief(news.getBrief());
-        newsForm.setContent(news.getContent());
-        newsForm.setDate(news.getDate());
-
-        for (Comment comment: news.getCommentList()) {
-            newsForm.getFormComments().add(comment);
+        try {
+            formDTOConverter.convertDTOToForm(newsForm, service.getNewsById(newsForm.getId()));
+            LOGGER.info("Getting selected news");
+        } catch (DaoException e) {
+            LOGGER.error("DaoException in openSelectedNews", e);
+            throw new ActionException(e);
         }
+        return mapping.findForward("selected");
     }
 
     public ActionForward openEditNewsPage(ActionMapping mapping, ActionForm form,
@@ -66,7 +66,7 @@ public class NewsAction extends DispatchAction {
 
         NewsForm newsForm = (NewsForm) form;
         try {
-            setNewsEntityInForm(newsForm);
+            formDTOConverter.convertDTOToForm(newsForm, service.getNewsById(newsForm.getId()));
             LOGGER.info("Getting selected news to edit mode page");
         } catch (DaoException e) {
             LOGGER.error("DaoException in openEditNewsPage", e);
@@ -83,21 +83,19 @@ public class NewsAction extends DispatchAction {
                 int id;
                 for (String s : parameterValues) {
                     id = Integer.parseInt(s);
-                    newsDao.deleteNews(newsDao.getNewsById(id));
+                    service.deleteNewsById(id);
                     LOGGER.info("Deleting selected news");
                 }
             } else {
                 NewsForm newsForm = (NewsForm) form;
-                News newsForDeleting = newsDao.getNewsById(newsForm.getId());
-                newsDao.deleteNews(newsForDeleting);
+                service.deleteNewsById(newsForm.getId());
                 LOGGER.info("Deleting news");
             }
         } catch (DaoException e) {
             LOGGER.error("DaoException in deleteNews", e);
             throw new ActionException(e);
         }
-        openMainPage(mapping, form, request, response);
 
-        return mapping.findForward("main");
+        return mapping.findForward("openMainAct");
     }
 }

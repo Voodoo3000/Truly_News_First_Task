@@ -35,8 +35,20 @@
     <url-pattern>*.do</url-pattern>
   </servlet-mapping>
 
+  <context-param>
+    <param-name>contextClass</param-name>
+    <param-value>
+      org.springframework.web.context.support.AnnotationConfigWebApplicationContext
+    </param-value>
+  </context-param>
+
+  <context-param>
+    <param-name>contextConfigLocation</param-name>
+    <param-value>kz.epam.intlab.spring.AppConfig</param-value>
+  </context-param>
+
   <listener>
-    <listener-class>kz.epam.intlab.listener.ContextListener</listener-class>
+    <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
   </listener>
 
 </web-app>

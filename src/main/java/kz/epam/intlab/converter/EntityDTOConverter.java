@@ -1,16 +1,11 @@
 package kz.epam.intlab.converter;
 
-import kz.epam.intlab.form.NewsForm;
-import kz.epam.intlab.parent.AbstractParentForEntityAndDTO;
+import kz.epam.intlab.dto.DTOParent;
+import kz.epam.intlab.entity.EntityParent;
 
-public class EntityDTOConverter implements Converter {
-    @Override
-    public AbstractParentForEntityAndDTO convertNewsFormToSomething(NewsForm newsForm) {
-        return null;
-    }
+public interface EntityDTOConverter<T extends DTOParent, K extends EntityParent> {
 
-    @Override
-    public NewsForm convertSomethingToNewsForm(AbstractParentForEntityAndDTO thing) {
-        return null;
-    }
+    T convertEntityToDTO(K entity);
+
+    K convertDTOToEntity(T dto);
 }

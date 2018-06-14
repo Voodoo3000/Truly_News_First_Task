@@ -1,29 +1,29 @@
 package kz.epam.intlab.dao;
 
 import kz.epam.intlab.entity.News;
-import kz.epam.intlab.util.HibernateSessionFactory;
+
 import org.apache.log4j.Logger;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import java.util.*;
 
+@Component
 public class NewsDao implements Dao {
 
     private static final Logger LOGGER = Logger.getLogger(NewsDao.class);
 
+    @Autowired
     private SessionFactory sessionFactory;
-    private Session session;
 
-    public NewsDao(HibernateSessionFactory hibernateSessionFactory) {
-        sessionFactory = hibernateSessionFactory.getSessionFactory();
-    }
+    private Session session;
 
     public Map<Integer, News> getAllNews() throws DaoException {
         Map<Integer, News> newsTitle = new HashMap<>();
         try {
-            System.out.println(sessionFactory);
             session = sessionFactory.openSession();
             session.beginTransaction();
             List result = session.createQuery("from News").list();
